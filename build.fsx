@@ -57,8 +57,6 @@ namespace MyNamespace {
     printfn "Native return value: %d" results.NativeCompilerReturnValue
     for m in results.Output do
       printfn "Message: %s" m
-    for ref in refs do
-      printfn "Reference: %s" ref
     printfn "ResultAssembly: %s" results.PathToAssembly
     printfn "Exists: %s" (if File.Exists results.PathToAssembly then "true" else "false")
     failwith "Compilation failed"
