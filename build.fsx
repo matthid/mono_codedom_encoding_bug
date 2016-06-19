@@ -19,6 +19,11 @@ open Microsoft.CSharp.RuntimeBinder
 Target "Travis" (fun _ ->
   printfn "Codepage: %d" Console.OutputEncoding.CodePage
 
+  try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
+  try Console.InputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
+  //try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(12000) with _ -> ()
+  //try Console.InputEncoding <- System.Text.Encoding.GetEncoding(12000) with _ -> ()
+  
   use prov = new CSharpCodeProvider()
   let source = @"
 #warning Trigger Some Warning
@@ -42,10 +47,6 @@ namespace MyNamespace {
   let tempDir = p.TempFiles.TempDir
   let assemblyName = Path.Combine(tempDir, String.Format("{0}.dll", "MyNamespace"))
   p.TempFiles.AddFile(assemblyName, true)
-  //try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
-  //try Console.InputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
-  //try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(12000) with _ -> ()
-  //try Console.InputEncoding <- System.Text.Encoding.GetEncoding(12000) with _ -> ()
   let results = prov.CompileAssemblyFromSource(p, [| source |])
   if isNull results.Errors |> not && results.Errors.HasErrors then
     printfn "Results: %A" results

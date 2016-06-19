@@ -1,11 +1,14 @@
 @echo off
-if exist bootstrap.cmd (
-  call bootstrap.cmd
-  if %ERRORLEVEL% NEQ 0 (
-    echo Exited with %ERRORLEVEL%
-    exit /b %ERRORLEVEL%
-  )
+
+.paket\paket.bootstrapper.exe
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
 
-set buildFile=build.fsx
-"packages/Yaaf.AdvancedBuilding/content/build.cmd" %*
+.paket\paket.exe restore
+if errorlevel 1 (
+  exit /b %errorlevel%
+)
+
+packages\FAKE\tools\FAKE.exe build.fsx %*
+pause
