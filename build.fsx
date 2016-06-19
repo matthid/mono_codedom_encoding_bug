@@ -5,8 +5,6 @@
 #r "packages/FAKE/tools/FakeLib.dll"
 
 open Fake
-let config = BuildInclude.config
-// Define your FAKE targets here
 open System
 open System.IO
 open System.CodeDom
