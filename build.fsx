@@ -17,8 +17,8 @@ open Microsoft.CSharp.RuntimeBinder
 Target "Travis" (fun _ ->
   printfn "Codepage: %d" Console.OutputEncoding.CodePage
 
-  try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
-  try Console.InputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
+  //try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
+  //try Console.InputEncoding <- System.Text.Encoding.GetEncoding(1200) with _ -> ()
   //try Console.OutputEncoding <- System.Text.Encoding.GetEncoding(12000) with _ -> ()
   //try Console.InputEncoding <- System.Text.Encoding.GetEncoding(12000) with _ -> ()
   
